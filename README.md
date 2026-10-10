@@ -1,4 +1,4 @@
-# Library Loan API
+# ResponsiMod1MayoPD
 
 REST API untuk manajemen peminjaman buku perpustakaan, dibangun menggunakan Node.js, Express.js, dan Supabase.
 
