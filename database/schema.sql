@@ -1,9 +1,3 @@
--- ============================================================
--- Library Loan Management System - Supabase Schema
--- Run this SQL in Supabase SQL Editor
--- ============================================================
-
--- Create the loans table
 CREATE TABLE IF NOT EXISTS loans (
   id          UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   member_id   VARCHAR(50)   NOT NULL,
@@ -14,28 +8,22 @@ CREATE TABLE IF NOT EXISTS loans (
   due_date    DATE          NOT NULL,
   return_date DATE,
   status      VARCHAR(20)   NOT NULL DEFAULT 'Dipinjam'
-                            CHECK (status IN ('Dipinjam', 'Dikembalikan', 'Terlambat')),
+  CHECK (status IN ('Dipinjam', 'Dikembalikan', 'Terlambat')),
   created_at  TIMESTAMPTZ   DEFAULT now(),
   updated_at  TIMESTAMPTZ   DEFAULT now()
 );
 
--- Create index for common filter columns
 CREATE INDEX IF NOT EXISTS idx_loans_status     ON loans(status);
 CREATE INDEX IF NOT EXISTS idx_loans_member_id  ON loans(member_id);
 CREATE INDEX IF NOT EXISTS idx_loans_book_id    ON loans(book_id);
 
--- Enable Row Level Security (RLS)
 ALTER TABLE loans ENABLE ROW LEVEL SECURITY;
 
--- Allow all operations using anon key (adjust for production as needed)
 CREATE POLICY "Allow all for anon" ON loans
   FOR ALL
   USING (true)
   WITH CHECK (true);
 
--- ──────────────────────────────────────────────────────────────
--- OPTIONAL: Seed sample data for testing
--- ──────────────────────────────────────────────────────────────
 INSERT INTO loans (member_id, member_name, book_id, book_title, loan_date, due_date, return_date, status)
 VALUES
   ('M001', 'Budi Santoso',   'B001', 'Laskar Pelangi',             '2026-09-01', '2026-09-15', NULL,         'Dipinjam'),
