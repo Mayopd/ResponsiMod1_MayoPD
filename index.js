@@ -6,12 +6,9 @@ const { errorHandler, notFoundHandler } = require('./src/middleware/errorHandler
 
 const app = express();
 
-// ─── Middleware ───────────────────────────────────────────────────────────────
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ─── Health Check ─────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
   res.status(200).json({
     success: true,
@@ -29,23 +26,20 @@ app.get('/api', (req, res) => {
     success: true,
     message: 'API v1 - Library Loan Management System',
     routes: {
-      'GET    /api/loans':            'Get all loans (filter: ?status=, ?member_id=, ?book_id=)',
-      'GET    /api/loans/:id':        'Get loan by ID',
-      'POST   /api/loans':            'Create new loan',
-      'PUT    /api/loans/:id':        'Update loan',
-      'DELETE /api/loans/:id':        'Delete loan',
+      'GET    /api/loans': 'Get all loans (filter: ?status=, ?member_id=, ?book_id=)',
+      'GET    /api/loans/:id': 'Get loan by ID',
+      'POST   /api/loans': 'Create new loan',
+      'PUT    /api/loans/:id': 'Update loan',
+      'DELETE /api/loans/:id': 'Delete loan',
     },
   });
 });
 
-// ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/loans', loanRoutes);
 
-// ─── Error Handling ───────────────────────────────────────────────────────────
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// ─── Start Server ─────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
