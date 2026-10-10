@@ -2,7 +2,7 @@
 
 REST API untuk manajemen peminjaman buku perpustakaan, dibangun menggunakan Node.js, Express.js, dan Supabase.
 
-Live API: https://responsi-mod1-mayo-pd-rrk4.vercel.app
+Live API: https://responsi-mod1-mayo.vercel.app/
 
 ---
 
