@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS loans (
   due_date    DATE          NOT NULL,
   return_date DATE,
   status      VARCHAR(20)   NOT NULL DEFAULT 'Dipinjam'
-  CHECK (status IN ('Dipinjam', 'Dikembalikan', 'Terlambat')),
+CHECK (status IN ('Dipinjam', 'Dikembalikan', 'Terlambat')),
   created_at  TIMESTAMPTZ   DEFAULT now(),
   updated_at  TIMESTAMPTZ   DEFAULT now()
 );
